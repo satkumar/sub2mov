@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  imdb_id: 
+  cover_url: MyString
+  full_cover_url: MyString
+  cast_names: MyText
+  cast_ids: MyString
+  genres: MyText
+  title: MyString
+  year: MyString
+  rating: MyString
+  plot: MyText
+  plot_outline: MyText
+  subs: MyText
+
+two:
+  imdb_id: 
+  cover_url: MyString
+  full_cover_url: MyString
+  cast_names: MyText
+  cast_ids: MyString
+  genres: MyText
+  title: MyString
+  year: MyString
+  rating: MyString
+  plot: MyText
+  plot_outline: MyText
+  subs: MyText

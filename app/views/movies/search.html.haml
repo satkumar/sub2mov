@@ -1,0 +1,94 @@
+- genres=["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","Game-Show","History","Horror","Music","Musical","Mystery","News","Reality-TV","Romance","Sci-Fi","Sport","Talk-Show","Thriller","War","Western"]
+%h1#filter.section-title
+  Filter by Genre
+#genres{:style=>"display: none;"}
+  %form{:action=>"/search"}
+    %table{:style=>"cellspacing: 4px;"}
+      %tbody
+        - genres.each_with_index do |genre,ind|
+          -if ind%4==0
+            %tr
+          %td
+            %input{:id=>"genre",:name=>"genre",:value=>genre,:type=>"radio"}
+            %label{:for=>genre}
+              = genre
+    %input{:id=>"q",:name=>"q",:value=>@q,:type=>"hidden"}
+    .center
+      %input.search-button{:type => "submit", :value => "GO!"}
+
+%h1.section-title
+  Search Results
+%ul.search-results
+  - @movies.each do |movie|
+    - if movie
+      %li
+        .box
+          .head
+            %h2
+              -if movie.title
+                = movie.title 
+              - else
+                Unknown
+            %p.text-right-red
+              Year: 
+              - if movie.year
+                = movie.year
+              - else
+                Unknown
+          .movie
+            .movie-image
+              %a{:href=>"http://www.imdb.com/title/tt#{movie.imdb_id}"}
+                -if movie.full_cover_url
+                  %img.cover{:src=>'/proxy?url='+movie.full_cover_url}
+                -else
+                  %img.cover{:src=>'/assets/noimage.png'}
+            .rating
+              - if movie.rating
+                %p 
+                  RATING: (
+                  = movie.rating
+                  )&nbsp;&nbsp;
+                .stars
+                  .stars-in{:style=>"width: "+(6*movie.rating.to_f).to_s+"px"}
+              - else
+                %p
+                  RATING: Unavailable
+          .result-info
+            .info
+              %h2
+                Plot: 
+              - if movie.plot
+                = truncate(movie.plot, :length => 500)
+              - else
+                Unavailable
+            .info
+              %h2
+                Cast:
+              - if movie.cast_ids and movie.cast_names
+                - ids = movie.cast_ids.split(',')
+                - movie.cast_names.split(',').each_with_index do |name, ind|
+                  %a{:href=>"http://www.imdb.com/name/nm#{ids[ind]}"}
+                    = name
+                  &nbsp;&nbsp;
+              - else
+                Unknown
+            .info
+              %h2
+                Genres:
+              - if movie.genres
+                - movie.genres.split(",").each do |genre|
+                  %a{:href=>"http://www.imdb.com/genre/#{genre}"}
+                    = genre
+                  &nbsp;&nbsp;
+              - else
+                Unknown
+            .info
+              %h2
+                Excerpts:
+              = @movies.excerpt_for(movie.subs).html_safe
+
+%h4.center
+  Sub2Mov
+.center
+  %p
+    = will_paginate @movies

@@ -1,0 +1,35 @@
+!!!
+%html{:dir => "ltr", :lang => "en-US", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %title Sub2Mov
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}
+    = stylesheet_link_tag 'application'
+    = favicon_link_tag 'favicon.png', :rel => "shortcut icon", :type=>"image/png"
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'
+    = javascript_include_tag 'jquery.mousewheel.min'
+    = javascript_include_tag 'cloud-carousel.1.0.5.min'
+    = javascript_include_tag 'application'
+  %body
+    #shell
+      #header
+        %h1#logo
+          %a{:href => "/" } Sub2Mov
+        #navigation
+        #sub-navigation
+          %ul
+            %li
+              %a{:href => "/"} HOME
+          #search
+            %form{"accept-charset" => "utf-8", :action => "search", :method => "get"}
+              %label{:for => "search-field"} SEARCH
+              %input#search-field.blink.search-field{:name => "q", :title => "Enter search here", :type => "text", :value => @q}
+              %input.search-button{:type => "submit", :value => "GO!"}
+      #main
+        #content
+          = yield
+      #footer
+        %p
+          " Copyright (c) 2012 Sub2Mov. All Rights reserved. "
+        %p
+          Design by
+          %a{:href => "http://chocotemplates.com", :target => "_blank", :title => "The Sweetest CSS Templates WorldWide"} ChocoTemplates.com

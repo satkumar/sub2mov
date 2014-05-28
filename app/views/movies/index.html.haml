@@ -1,0 +1,34 @@
+#pop-carousel
+  %h1 Random Movies
+  - @pop.each do |mov|
+    %a{:href=>"http://www.imdb.com/title/tt"+mov["id"]}
+      - if mov['img_url']
+        - img_url = '/proxy?url='+mov['img_url']
+      - else
+        - img_url = '/assets/noimage.png'
+      %img.cloudcarousel{:src=>img_url, :width=>100, :height=>140, :alt=>mov['desc'],:title=>mov['title']}
+     
+  #title-text
+  #alt-text
+  #left-but.carouselLeft
+  #right-but.carouselRight
+
+.section-title
+  About Sub2mov
+.section-content
+  %p
+    Sub2Mov allows one to search for a movie based on subtitle/dialogue used in the movie. When searching for a movie, Sub2Mov returns the closest matches based on the likelihood of a dialogue occurring in a movie. Sub2Mov's database consists of about 20,000 movies and their subtitles (provided by 
+    %a{:href=>"http://www.opensubtitles.org/"}
+      opensubtitles.org
+    ). It also allows filtering search results based on a movie's genre.
+
+.section-title
+  Details
+.section-content
+  %p
+    Sub2Mov application and service is developed as a project by 
+    %a(href="mailto:gautamkorlam@cs.ucsb.edu") Gautam Korlam
+    and
+    %a(href="mailto:sathiishkumar@ece.ucsb.edu") Sathiish Kumar
+    for the course Web Search and Advanced Internet Services (CS290N) at UCSB under the guidance of
+    %a(href="http://www.cs.ucsb.edu/~tyang/") Tao Yang.
